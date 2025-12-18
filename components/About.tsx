@@ -137,10 +137,22 @@ const About: React.FC = () => {
                {stats.map((stat, index) => (
                    <motion.div
                         key={index}
-                        initial={{ opacity: 0, y: 50, scale: 0.9 }}
-                        whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                        viewport={{ once: true, margin: "-10%" }}
-                        transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 * index + 0.5 }}
+                        initial={{ opacity: 0,
+                           y: 50, 
+                           scale: 0.9 ,
+                           }}
+                        whileInView={{ 
+                          opacity: 1, 
+                          y: 0, 
+                          scale: 1 ,
+                          }}
+                        viewport={{ 
+                          once: true, 
+                          margin: "-10%" }}
+                        transition={{ 
+                          duration: 0.8,
+                          ease: [0.4, 0, 0.2, 1], 
+                          delay: 0.15 * index }}
                         className="group p-4 rounded-2xl bg-surface/30 border border-border hover:border-yellow-500/30 transition-all duration-300 hover:bg-yellow-500/5"
                    >
                        <div className="flex items-center gap-3 mb-2">

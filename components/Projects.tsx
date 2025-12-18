@@ -56,10 +56,10 @@ const Projects: React.FC = () => {
         {/* Header */}
         <div className="text-center mb-24">
             <motion.div 
-                initial={{ opacity: 0, y: 50, scale: 0.9 }}
+                initial={{ opacity: 0, y: 50, scale: 0.8 }}
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+                transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
                 className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-surface/50 border border-yellow-500/20 mb-6 backdrop-blur-md"
             >
                 <div className="w-1.5 h-1.5 rounded-full bg-yellow-500 animate-pulse" />

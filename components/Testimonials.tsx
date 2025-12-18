@@ -144,8 +144,7 @@ const TestimonialCard: React.FC<{ item: typeof TESTIMONIALS[0], index: number }>
         <motion.div
             layout
             initial={{ opacity: 0, y: 50, scale: 0.9 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            viewport={{ once: true, margin: "-10%" }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 * index }}
             className="group relative w-full h-full bg-surface/40 backdrop-blur-xl border border-white/10 dark:border-white/5 p-8 rounded-3xl hover:border-yellow-500/30 transition-all duration-500 flex flex-col hover:-translate-y-2 hover:shadow-[0_0_50px_-10px_rgba(234,179,8,0.15)]"
         >

@@ -180,9 +180,9 @@ const TiltCard = ({ category, index }: { category: string, index: number }) => {
                     </div>
 
                     {/* Description */}
-                    <p className="text-muted mb-8 text-sm leading-relaxed border-b border-border/50 pb-6 group-hover:border-yellow-500/20 transition-colors duration-500">
+                    {/* <p className="text-muted mb-8 text-sm leading-relaxed border-b border-border/50 pb-6 group-hover:border-yellow-500/20 transition-colors duration-500">
                         {config.desc}
-                    </p>
+                    </p> */}
 
                     {/* Skill Tags */}
                     <div className="flex flex-wrap gap-3">

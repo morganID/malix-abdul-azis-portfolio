@@ -50,7 +50,7 @@ const Navbar: React.FC = () => {
         transition={{ duration: 0.8, ease: "circOut" }}
         className={`pointer-events-auto transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] border ${
           isScrolled
-            ? 'bg-black/40 backdrop-blur-xl border-yellow-500/10 rounded-full py-3 px-6 shadow-[0_4px_30px_rgba(0,0,0,0.1)] w-full max-w-4xl'
+            ? 'bg-black/40 backdrop-blur-xl border-yellow-500/10 rounded-full py-3 px-6 shadow-[0_4px_30px_rgba(0,0,0,0.1)] w-full max-w-[54rem]'
             : 'bg-transparent border-transparent py-4 px-0 w-full max-w-7xl'
         }`}
       >
