@@ -50,8 +50,8 @@ const Navbar: React.FC = () => {
         transition={{ duration: 0.8, ease: "circOut" }}
         className={`pointer-events-auto transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] border ${
           isScrolled
-            ? `${!isDark ? 'bg-black/90 backdrop-blur-xl border-yellow-500/10' : 'bg-black/40 backdrop-blur-xl border-yellow-500/10'} rounded-full py-3 px-6 shadow-[0_4px_30px_rgba(0,0,0,0.1)] w-full max-w-[54rem]`
-            : `${!isDark ? 'bg-black/80 backdrop-blur-xl border-yellow-500/10' : 'bg-transparent border-transparent'} py-4 px-0 w-full max-w-7xl`
+            ? 'bg-black/90 backdrop-blur-xl border-yellow-500/10 rounded-full py-3 px-6 shadow-[0_4px_30px_rgba(0,0,0,0.1)] w-full max-w-[54rem]'
+            : 'bg-transparent border-transparent py-4 px-0 w-full max-w-7xl'
         }`}
       >
         <div className="flex justify-between items-center relative overflow-hidden">
@@ -62,19 +62,19 @@ const Navbar: React.FC = () => {
                 <Hexagon className="w-full h-full text-yellow-500 stroke-[1.5] group-hover:rotate-180 transition-transform duration-700" />
                 <span className="absolute text-[10px] font-bold text-yellow-500">M</span>
              </div>
-             <span className={`text-lg font-university font-bold tracking-widest group-hover:text-yellow-500 transition-colors ${!isDark ? 'text-white' : 'text-foreground'}`}>
+             <span className={`text-lg font-university font-bold tracking-widest group-hover:text-yellow-500 transition-colors ${isScrolled ? 'text-white' : 'text-foreground'}`}>
                 MALIX
              </span>
           </a>
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-2 relative z-10">
-            <div className={`flex items-center gap-1 px-2 py-1.5 ${isScrolled ? '' : `${!isDark ? 'bg-white/10 backdrop-blur-md rounded-full border border-white/10 pr-2' : 'bg-surface/30 backdrop-blur-md rounded-full border border-white/5 pr-2'}`}`}>
+            <div className={`flex items-center gap-1 px-2 py-1.5 ${isScrolled ? '' : 'bg-surface/30 backdrop-blur-md rounded-full border border-white/5 pr-2'}`}>
               {NAV_ITEMS.map((item) => (
                 <a
                   key={item.label}
                   href={item.href}
-                  className={`relative px-4 py-1.5 text-[10px] uppercase tracking-widest font-bold hover:text-yellow-500 transition-colors group overflow-hidden ${!isDark ? 'text-white/80' : 'text-muted hover:text-foreground'}`}
+                  className={`relative px-4 py-1.5 text-[10px] uppercase tracking-widest font-bold hover:text-yellow-500 transition-colors group overflow-hidden ${isScrolled ? 'text-white/80' : 'text-muted hover:text-foreground'}`}
                 >
                   <span className="relative z-10">{item.label}</span>
                   <span className="absolute bottom-0 left-0 w-full h-[1px] bg-yellow-500 -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></span>
@@ -85,7 +85,7 @@ const Navbar: React.FC = () => {
             {/* Theme Toggle */}
             <button
                 onClick={toggleTheme}
-                className={`ml-4 p-2 rounded-full hover:text-yellow-500 transition-colors border border-transparent hover:border-yellow-500/20 hover:bg-yellow-500/5 ${!isDark ? 'text-white/80' : 'text-muted'}`}
+                className={`ml-4 p-2 rounded-full hover:text-yellow-500 transition-colors border border-transparent hover:border-yellow-500/20 hover:bg-yellow-500/5 ${isScrolled ? 'text-white/80' : 'text-muted'}`}
                 aria-label="Toggle Theme"
             >
                 {isDark ? <Sun size={18} /> : <Moon size={18} />}
@@ -103,12 +103,12 @@ const Navbar: React.FC = () => {
           <div className="flex gap-4 md:hidden relative z-10 items-center">
              <button
                 onClick={toggleTheme}
-                className={`p-2 ${!isDark ? 'text-white' : 'text-foreground'}`}
+                className={`p-2 ${isScrolled ? 'text-white' : 'text-foreground'}`}
              >
                 {isDark ? <Sun size={20} /> : <Moon size={20} />}
              </button>
              <button
-                className={`p-2 hover:text-yellow-500 transition-colors ${!isDark ? 'text-white' : 'text-foreground'}`}
+                className={`p-2 hover:text-yellow-500 transition-colors ${isScrolled ? 'text-white' : 'text-foreground'}`}
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
              >
                 {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
