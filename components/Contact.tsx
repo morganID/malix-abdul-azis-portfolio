@@ -6,16 +6,6 @@ import { Mail, MapPin, Send, MessageSquare, ArrowRight } from 'lucide-react';
 const motion = motionBase as any;
 
 const Contact: React.FC = () => {
-  // Gold Dust Particles
-  const particles = Array.from({ length: 20 }).map((_, i) => ({
-    id: i,
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    size: Math.random() * 2 + 1,
-    duration: Math.random() * 10 + 10,
-    delay: Math.random() * 5
-  }));
-
   return (
     <section id="contact" className="py-32 bg-background relative overflow-hidden transition-colors duration-500">
       
@@ -25,31 +15,7 @@ const Contact: React.FC = () => {
       {/* Ambient Glow */}
       <div className="absolute bottom-0 right-0 w-[800px] h-[800px] bg-yellow-600/5 dark:bg-yellow-500/5 rounded-full blur-[120px] pointer-events-none translate-y-1/2 translate-x-1/2" />
 
-      {/* Gold Dust Particles */}
-      <div className="absolute inset-0 pointer-events-none">
-        {particles.map((p) => (
-            <motion.div
-                key={p.id}
-                className="absolute rounded-full bg-yellow-500/30 dark:bg-yellow-200/20"
-                style={{ 
-                    left: `${p.x}%`, 
-                    top: `${p.y}%`,
-                    width: p.size,
-                    height: p.size
-                }}
-                animate={{ 
-                    y: [0, -100], 
-                    opacity: [0, 0.8, 0] 
-                }}
-                transition={{ 
-                    duration: p.duration, 
-                    repeat: Infinity, 
-                    delay: p.delay,
-                    ease: "linear"
-                }}
-            />
-        ))}
-      </div>
+    
 
       <div className="max-w-7xl w-full mx-auto px-6 relative z-10">
         

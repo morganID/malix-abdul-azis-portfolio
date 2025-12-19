@@ -5,7 +5,6 @@ import { ArrowRight, Download } from 'lucide-react';
 const motion = motionBase as any;
 
 const Hero: React.FC = () => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   
   // 3D Tilt Logic
@@ -67,182 +66,7 @@ const Hero: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Canvas Neural Network Animation (Updated: Uniform Spread + Wrapping)
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
 
-    let width = canvas.width = window.innerWidth;
-    let height = canvas.height = window.innerHeight;
-    
-    // Adjusted particle count for uniform density
-    const particleCount = width < 768 ? 60 : 120;
-    const connectionDistance = 150;
-    const mouseDistance = 250; 
-
-    const mouse = { x: -1000, y: -1000 };
-
-    class Particle {
-        x: number; y: number; vx: number; vy: number; size: number; alpha: number;
-        constructor(initialX?: number, initialY?: number) {
-            this.x = initialX || Math.random() * width;
-            this.y = initialY || Math.random() * height;
-            
-            // Random velocity for drifting
-            this.vx = (Math.random() - 0.5) * 0.5;
-            this.vy = (Math.random() - 0.5) * 0.5;
-            
-            this.size = Math.random() * 2 + 1;
-            this.alpha = Math.random() * 0.5 + 0.2;
-        }
-        
-        update() {
-            // 1. Base Velocity (Drifting)
-            this.x += this.vx;
-            this.y += this.vy;
-
-            // REMOVED: Center Push logic to ensure even spread
-
-            // 2. Mouse REPULSION
-            const dxMouse = mouse.x - this.x;
-            const dyMouse = mouse.y - this.y;
-            const distMouse = Math.sqrt(dxMouse*dxMouse + dyMouse*dyMouse);
-            
-            if (distMouse < mouseDistance) {
-                const force = (mouseDistance - distMouse) / mouseDistance;
-                
-                // Direction: Move AWAY from mouse
-                const repulsionStrength = 5; 
-                
-                this.x -= (dxMouse / distMouse) * force * repulsionStrength; 
-                this.y -= (dyMouse / distMouse) * force * repulsionStrength;
-            }
-
-            // 3. Screen Wrapping (Infinite Canvas Effect)
-            // Instead of respawning in center, wrap around to opposite side
-            // This maintains uniform density across the screen
-            const margin = 50; // Buffer so they don't pop out visibly
-            
-            if (this.x < -margin) this.x = width + margin;
-            if (this.x > width + margin) this.x = -margin;
-            
-            if (this.y < -margin) this.y = height + margin;
-            if (this.y > height + margin) this.y = -margin;
-        }
-
-        draw(isDark: boolean, isHovered: boolean) {
-            if (!ctx) return;
-            const r = isDark ? 255 : 0;
-            const g = isDark ? 255 : 0;
-            const b = isDark ? 255 : 0;
-            
-            // Glow effect
-            if (isHovered) {
-                ctx.shadowBlur = 15;
-                ctx.shadowColor = `rgba(59, 130, 246, 0.8)`; // Blue glow
-                ctx.fillStyle = `rgba(100, 180, 255, ${this.alpha})`;
-            } else {
-                ctx.shadowBlur = 0;
-                ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${this.alpha})`;
-            }
-            
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fill();
-            
-            ctx.shadowBlur = 0;
-        }
-    }
-
-    const particles: Particle[] = [];
-    for (let i = 0; i < particleCount; i++) {
-        particles.push(new Particle());
-    }
-
-    const animate = () => {
-        if (!ctx) return;
-        ctx.clearRect(0, 0, width, height);
-        
-        const isDark = document.documentElement.classList.contains('dark');
-
-        particles.forEach(p => p.update());
-
-        for (let i = 0; i < particles.length; i++) {
-            const dxM = mouse.x - particles[i].x;
-            const dyM = mouse.y - particles[i].y;
-            const distM = Math.sqrt(dxM*dxM + dyM*dyM);
-            const isHoveredI = distM < 250;
-
-            particles[i].draw(isDark, isHoveredI);
-
-            for (let j = i; j < particles.length; j++) {
-                const dx = particles[i].x - particles[j].x;
-                const dy = particles[i].y - particles[j].y;
-                const distance = Math.sqrt(dx*dx + dy*dy);
-
-                if (distance < connectionDistance) {
-                    const midX = (particles[i].x + particles[j].x) / 2;
-                    const midY = (particles[i].y + particles[j].y) / 2;
-                    const midDx = mouse.x - midX;
-                    const midDy = mouse.y - midY;
-                    const midDist = Math.sqrt(midDx*midDx + midDy*midDy);
-
-                    const isActive = midDist < 250;
-
-                    ctx.beginPath();
-                    
-                    if (isActive) {
-                        // ACTIVE STATE (Hovered)
-                        const intensity = 1 - (midDist / 250);
-                        ctx.shadowBlur = 20 * intensity;
-                        ctx.shadowColor = `rgba(60, 150, 255, ${intensity})`;
-                        ctx.strokeStyle = `rgba(100, 200, 255, ${0.4 + intensity * 0.6})`;
-                        ctx.lineWidth = 1 + (intensity * 2);
-                    } else {
-                        // PASSIVE STATE
-                        const opacity = 1 - (distance / connectionDistance);
-                        ctx.shadowBlur = 0;
-                        if (isDark) {
-                             ctx.strokeStyle = `rgba(148, 163, 184, ${opacity * 0.2})`; 
-                        } else {
-                             ctx.strokeStyle = `rgba(71, 85, 105, ${opacity * 0.2})`;
-                        }
-                        ctx.lineWidth = 0.5;
-                    }
-
-                    ctx.moveTo(particles[i].x, particles[i].y);
-                    ctx.lineTo(particles[j].x, particles[j].y);
-                    ctx.stroke();
-                    ctx.shadowBlur = 0;
-                }
-            }
-        }
-        requestAnimationFrame(animate);
-    };
-
-    animate();
-
-    const handleResize = () => {
-        width = canvas.width = window.innerWidth;
-        height = canvas.height = window.innerHeight;
-    };
-    
-    const handleCanvasMouseMove = (e: MouseEvent) => {
-        const rect = canvas.getBoundingClientRect();
-        mouse.x = e.clientX - rect.left;
-        mouse.y = e.clientY - rect.top;
-    };
-
-    window.addEventListener('resize', handleResize);
-    canvas.addEventListener('mousemove', handleCanvasMouseMove);
-
-    return () => {
-        window.removeEventListener('resize', handleResize);
-        canvas.removeEventListener('mousemove', handleCanvasMouseMove);
-    };
-  }, []);
 
   return (
     <section 
@@ -257,25 +81,8 @@ const Hero: React.FC = () => {
       {/* Central Eclipse Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] sm:w-[800px] sm:h-[800px] bg-blue-900/10 dark:bg-blue-900/20 rounded-full blur-[120px] pointer-events-none mix-blend-screen animate-pulse-slow" />
       
-      {/* Stars (Only visible in Dark Mode usually, but let's keep them subtle in light) */}
-      <div className="absolute inset-0 z-0">
-         {[...Array(60)].map((_, i) => (
-            <div 
-               key={i}
-               className="absolute rounded-full bg-foreground dark:bg-white animate-twinkle"
-               style={{
-                  top: `${Math.random() * 100}%`,
-                  left: `${Math.random() * 100}%`,
-                  width: `${Math.random() < 0.1 ? 2 : 1}px`,
-                  height: `${Math.random() < 0.1 ? 2 : 1}px`,
-                  animationDelay: `${Math.random() * 5}s`,
-                  opacity: Math.random() * 0.3 + 0.1
-               }}
-            />
-         ))}
-      </div>
-
-      <canvas ref={canvasRef} className="absolute inset-0 z-0 opacity-40" />
+      {/* Ambient background without particles */}
+      <div className="absolute inset-0 z-0 bg-gradient-to-b from-transparent via-blue-50/5 to-transparent dark:via-blue-900/5" />
       
       {/* 1. MAIN CONTENT */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 w-full flex flex-col items-center justify-center perspective-[1200px]">
