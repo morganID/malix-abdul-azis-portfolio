@@ -52,7 +52,7 @@ const Experience: React.FC = () => {
                 transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
                 className="flex items-center gap-4 mb-10"
             >
-                <div className="p-3 bg-surface/50 border border-yellow-500/20 rounded-xl text-yellow-500 shadow-[0_0_15px_-3px_rgba(234,179,8,0.2)]">
+                <div className="p-3 bg-surface/50 border border-yellow-500/20 rounded-xl text-yellow-600 dark:text-yellow-400 shadow-[0_0_15px_-3px_rgba(234,179,8,0.2)]">
                     <Briefcase size={24} />
                 </div>
                 <h3 className="text-2xl font-display font-bold text-foreground">Career Path</h3>
@@ -76,7 +76,7 @@ const Experience: React.FC = () => {
                         </p>
                         <div className="flex flex-wrap gap-2 mt-auto">
                             {job.technologies.map(tech => (
-                                <span key={tech} className="text-[10px] uppercase tracking-wider px-2 py-1 bg-surface border border-white/5 rounded text-muted/80">
+                                <span key={tech} className="text-[10px] uppercase tracking-wider px-2 py-1 bg-surface border border-border/30 rounded text-muted/80">
                                     {tech}
                                 </span>
                             ))}
@@ -95,7 +95,7 @@ const Experience: React.FC = () => {
                 transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
                 className="flex items-center gap-4 mb-10"
             >
-                <div className="p-3 bg-surface/50 border border-yellow-500/20 rounded-xl text-yellow-500 shadow-[0_0_15px_-3px_rgba(234,179,8,0.2)]">
+                <div className="p-3 bg-surface/50 border border-yellow-500/20 rounded-xl text-yellow-600 dark:text-yellow-400 shadow-[0_0_15px_-3px_rgba(234,179,8,0.2)]">
                     <GraduationCap size={24} />
                 </div>
                 <h3 className="text-2xl font-display font-bold text-foreground">Academic Arc</h3>
@@ -140,13 +140,13 @@ const TimelineCard = ({ children, index }: { children: React.ReactNode, index: n
             className="group relative pl-8"
         >
             {/* Connecting Line */}
-            <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-yellow-500/50 to-transparent opacity-30" />
+            <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-border to-transparent opacity-50" />
             
             {/* Glowing Dot */}
             <div className="absolute left-[-3.5px] top-6 w-2 h-2 rounded-full bg-yellow-500 shadow-[0_0_10px_rgba(234,179,8,0.5)] transition-all duration-500 group-hover:scale-150" />
 
             {/* Glass Card */}
-            <div className="relative bg-surface/40 backdrop-blur-md border border-white/10 dark:border-white/5 p-6 rounded-2xl transition-all duration-500 group-hover:border-yellow-500/30 group-hover:shadow-[0_0_30px_-10px_rgba(234,179,8,0.15)] overflow-hidden">
+            <div className="relative bg-surface/40 backdrop-blur-md border border-border/50 p-6 rounded-2xl transition-all duration-500 group-hover:border-yellow-500/30 group-hover:shadow-[0_0_30px_-10px_rgba(234,179,8,0.15)] overflow-hidden">
                 
                 {/* Metallic Border Gradient on Hover */}
                 <div className="absolute inset-0 rounded-2xl border border-transparent group-hover:border-yellow-500/30 transition-colors duration-500" />
