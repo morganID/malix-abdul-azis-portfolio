@@ -5,16 +5,6 @@ import { Award, Code, Globe, Zap } from 'lucide-react';
 const motion = motionBase as any;
 
 const About: React.FC = () => {
-  // Gold Dust Particles
-  const particles = Array.from({ length: 25 }).map((_, i) => ({
-    id: i,
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    size: Math.random() * 2 + 1,
-    duration: Math.random() * 10 + 10,
-    delay: Math.random() * 5
-  }));
-
   const stats = [
     { label: 'Years Experience', value: '5+', icon: Award },
     { label: 'Projects Done', value: '50+', icon: Code },
@@ -24,57 +14,37 @@ const About: React.FC = () => {
 
   return (
     <section id="about" className="py-32 bg-background relative overflow-hidden transition-colors duration-500">
-      
+
       {/* --- BACKGROUND FX --- */}
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-yellow-900/20 to-transparent"></div>
-      
+
       {/* Ambient Glow */}
       <div className="absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-yellow-600/5 dark:bg-yellow-500/5 rounded-full blur-[120px] pointer-events-none" />
-
-      {/* Gold Dust Particles */}
-      <div className="absolute inset-0 pointer-events-none">
-        {particles.map((p) => (
-            <motion.div
-                key={p.id}
-                className="absolute rounded-full bg-yellow-500/30 dark:bg-yellow-200/20"
-                style={{ 
-                    left: `${p.x}%`, 
-                    top: `${p.y}%`,
-                    width: p.size,
-                    height: p.size
-                }}
-                animate={{ 
-                    y: [0, -100], 
-                    opacity: [0, 0.8, 0] 
-                }}
-                transition={{ 
-                    duration: p.duration, 
-                    repeat: Infinity, 
-                    delay: p.delay,
-                    ease: "linear"
-                }}
-            />
-        ))}
-      </div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="grid md:grid-cols-2 gap-16 items-center">
           
-          {/* Left Column: 3D Profile Image */}
-          <TiltWrapper>
-            <div className="relative aspect-[4/5] w-full max-w-md mx-auto md:max-w-none rounded-3xl overflow-hidden bg-surface/40 backdrop-blur-xl border border-white/10 dark:border-white/5 group shadow-2xl">
-                
+          {/* Left Column: Profile Image */}
+          <div className="relative">
+            <motion.div
+                initial={{ opacity: 0, y: 50, scale: 0.9 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true, margin: "-10%" }}
+                transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+                className="relative aspect-[4/5] w-full max-w-md mx-auto md:max-w-none rounded-3xl overflow-hidden bg-surface/40 backdrop-blur-xl border border-white/10 dark:border-white/5 group shadow-2xl"
+            >
+
                 {/* Image */}
-                <img 
-                    src="https://picsum.photos/800/1000?grayscale" 
-                    alt="Malix Abdul Azis" 
+                <img
+                    src="https://picsum.photos/800/1000?grayscale"
+                    alt="Malix Abdul Azis"
                     className="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-700"
                 />
-                
+
                 {/* Overlays */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80" />
                 <div className="absolute inset-0 bg-yellow-500/10 mix-blend-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                
+
                 {/* Border Glow */}
                 <div className="absolute inset-0 rounded-3xl border-2 border-transparent group-hover:border-yellow-500/30 transition-colors duration-500 pointer-events-none" />
 
@@ -88,10 +58,10 @@ const About: React.FC = () => {
                         <p className="text-white text-sm font-medium">Building the Future</p>
                     </div>
                 </div>
-            </div>
+            </motion.div>
             {/* Back Glow Decoration */}
             <div className="absolute -inset-4 bg-yellow-500/10 blur-2xl rounded-[3rem] -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-          </TiltWrapper>
+          </div>
 
           {/* Right Column: Content */}
           <div className="relative">
@@ -173,54 +143,6 @@ const About: React.FC = () => {
   );
 };
 
-// --- SUB-COMPONENT: 3D TILT WRAPPER ---
-const TiltWrapper = ({ children }: { children: React.ReactNode }) => {
-    const x = useMotionValue(0);
-    const y = useMotionValue(0);
 
-    const mouseX = useSpring(x, { stiffness: 150, damping: 15 });
-    const mouseY = useSpring(y, { stiffness: 150, damping: 15 });
-
-    const rotateX = useTransform(mouseY, [-0.5, 0.5], ["5deg", "-5deg"]);
-    const rotateY = useTransform(mouseX, [-0.5, 0.5], ["-5deg", "5deg"]);
-
-    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        const width = rect.width;
-        const height = rect.height;
-        const mouseXVal = e.clientX - rect.left;
-        const mouseYVal = e.clientY - rect.top;
-        const xPct = mouseXVal / width - 0.5;
-        const yPct = mouseYVal / height - 0.5;
-        x.set(xPct);
-        y.set(yPct);
-    };
-
-    const handleMouseLeave = () => {
-        x.set(0);
-        y.set(0);
-    };
-
-    return (
-        <motion.div
-            initial={{ opacity: 0, y: 50, scale: 0.9 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            viewport={{ once: true, margin: "-10%" }}
-            transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-            style={{ 
-                rotateX, 
-                rotateY, 
-                transformStyle: "preserve-3d" 
-            }}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-            className="perspective-1000 group"
-        >
-            <div style={{ transform: "translateZ(20px)" }}>
-                {children}
-            </div>
-        </motion.div>
-    );
-};
 
 export default About;

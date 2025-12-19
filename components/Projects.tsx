@@ -6,50 +6,14 @@ import { ExternalLink, Github, ArrowUpRight } from 'lucide-react';
 const motion = motionBase as any;
 
 const Projects: React.FC = () => {
-  // Gold Dust Particles (Consistent with Skills Section)
-  const particles = Array.from({ length: 20 }).map((_, i) => ({
-    id: i,
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    size: Math.random() * 2 + 1,
-    duration: Math.random() * 10 + 10,
-    delay: Math.random() * 5
-  }));
-
   return (
     <section id="projects" className="py-32 bg-background relative overflow-hidden transition-colors duration-500">
-      
+
       {/* --- BACKGROUND FX --- */}
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-yellow-900/20 to-transparent"></div>
-      
+
       {/* Ambient Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-yellow-600/5 dark:bg-yellow-500/5 rounded-full blur-[120px] pointer-events-none" />
-
-      {/* Gold Dust Particles */}
-      <div className="absolute inset-0 pointer-events-none">
-        {particles.map((p) => (
-            <motion.div
-                key={p.id}
-                className="absolute rounded-full bg-yellow-500/30 dark:bg-yellow-200/20"
-                style={{ 
-                    left: `${p.x}%`, 
-                    top: `${p.y}%`,
-                    width: p.size,
-                    height: p.size
-                }}
-                animate={{ 
-                    y: [0, -100], 
-                    opacity: [0, 0.8, 0] 
-                }}
-                transition={{ 
-                    duration: p.duration, 
-                    repeat: Infinity, 
-                    delay: p.delay,
-                    ease: "linear"
-                }}
-            />
-        ))}
-      </div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         
@@ -104,64 +68,31 @@ const Projects: React.FC = () => {
   );
 };
 
-// --- SUB-COMPONENT: 3D TILT PROJECT CARD ---
+// --- SUB-COMPONENT: PROJECT CARD ---
 const ProjectCard = ({ project, index }: { project: any, index: number }) => {
-    const x = useMotionValue(0);
-    const y = useMotionValue(0);
-
-    const mouseX = useSpring(x, { stiffness: 150, damping: 15 });
-    const mouseY = useSpring(y, { stiffness: 150, damping: 15 });
-
-    const rotateX = useTransform(mouseY, [-0.5, 0.5], ["5deg", "-5deg"]);
-    const rotateY = useTransform(mouseX, [-0.5, 0.5], ["-5deg", "5deg"]);
-
-    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        const width = rect.width;
-        const height = rect.height;
-        const mouseXVal = e.clientX - rect.left;
-        const mouseYVal = e.clientY - rect.top;
-        const xPct = mouseXVal / width - 0.5;
-        const yPct = mouseYVal / height - 0.5;
-        x.set(xPct);
-        y.set(yPct);
-    };
-
-    const handleMouseLeave = () => {
-        x.set(0);
-        y.set(0);
-    };
-
     return (
         <motion.div
             initial={{ opacity: 0, y: 50, scale: 0.9 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true, margin: "-10%" }}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 * index }}
-            style={{ 
-                rotateX, 
-                rotateY, 
-                transformStyle: "preserve-3d" 
-            }}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-            className="group relative perspective-1000 h-full"
+            className="group relative h-full"
         >
             <div className="relative h-full bg-surface/40 backdrop-blur-xl border border-white/10 dark:border-white/5 rounded-3xl overflow-hidden shadow-2xl dark:shadow-black/50 hover:shadow-[0_0_50px_-10px_rgba(234,179,8,0.2)] hover:border-yellow-500/30 transition-all duration-500 flex flex-col">
-                
+
                 {/* Radial Golden Glow Gradient (Replaces Shimmer) */}
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none bg-[radial-gradient(circle_at_center,rgba(234,179,8,0.1)_0%,transparent_70%)] z-0" />
 
                 {/* Image Container */}
                 <div className="relative aspect-[16/10] overflow-hidden z-10">
                     <div className="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent z-10 opacity-80" />
-                    
+
                     {/* Gold sheen on image hover */}
                     <div className="absolute inset-0 bg-yellow-500/10 mix-blend-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20 pointer-events-none" />
-                    
-                    <img 
-                        src={project.image} 
-                        alt={project.title} 
+
+                    <img
+                        src={project.image}
+                        alt={project.title}
                         className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
                     />
 
@@ -179,8 +110,8 @@ const ProjectCard = ({ project, index }: { project: any, index: number }) => {
                 </div>
 
                 {/* Content Body */}
-                <div className="p-8 flex flex-col flex-grow relative z-20" style={{ transform: "translateZ(30px)" }}>
-                    
+                <div className="p-8 flex flex-col flex-grow relative z-20">
+
                     {/* Tags */}
                     <div className="flex flex-wrap gap-2 mb-4">
                         {project.tags.map((tag: string) => (
@@ -193,7 +124,7 @@ const ProjectCard = ({ project, index }: { project: any, index: number }) => {
                     <h3 className="text-2xl font-display font-bold text-foreground mb-3 group-hover:text-yellow-500 transition-colors duration-300">
                         {project.title}
                     </h3>
-                    
+
                     <p className="text-muted text-sm leading-relaxed mb-6 flex-grow">
                         {project.description}
                     </p>

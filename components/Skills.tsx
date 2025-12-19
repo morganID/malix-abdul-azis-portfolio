@@ -8,48 +8,12 @@ const motion = motionBase as any;
 const Skills: React.FC = () => {
   const categories = ['Frontend', 'Backend', 'Tools', 'Design'];
 
-  // Gold Dust Particles
-  const particles = Array.from({ length: 30 }).map((_, i) => ({
-    id: i,
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    size: Math.random() * 2 + 1,
-    duration: Math.random() * 10 + 10,
-    delay: Math.random() * 5
-  }));
-
   return (
     <section id="skills" className="py-32 bg-background relative flex flex-col items-center justify-center overflow-hidden transition-colors duration-500">
-      
+
       {/* --- BACKGROUND FX --- */}
       {/* Ambient Gold Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-yellow-600/5 dark:bg-yellow-500/5 rounded-full blur-[120px] pointer-events-none" />
-      
-      {/* Gold Dust Particles */}
-      <div className="absolute inset-0 pointer-events-none">
-        {particles.map((p) => (
-            <motion.div
-                key={p.id}
-                className="absolute rounded-full bg-yellow-500/30 dark:bg-yellow-200/20"
-                style={{ 
-                    left: `${p.x}%`, 
-                    top: `${p.y}%`,
-                    width: p.size,
-                    height: p.size
-                }}
-                animate={{ 
-                    y: [0, -100], 
-                    opacity: [0, 0.8, 0] 
-                }}
-                transition={{ 
-                    duration: p.duration, 
-                    repeat: Infinity, 
-                    delay: p.delay,
-                    ease: "linear"
-                }}
-            />
-        ))}
-      </div>
 
       {/* Header */}
       <div className="text-center mb-20 relative z-10 px-6">
@@ -96,34 +60,8 @@ const Skills: React.FC = () => {
   );
 };
 
-// --- SUB-COMPONENT: 3D TILT CARD ---
+// --- SUB-COMPONENT: SKILL CARD ---
 const TiltCard = ({ category, index }: { category: string, index: number }) => {
-    const x = useMotionValue(0);
-    const y = useMotionValue(0);
-
-    const mouseX = useSpring(x, { stiffness: 150, damping: 15 });
-    const mouseY = useSpring(y, { stiffness: 150, damping: 15 });
-
-    const rotateX = useTransform(mouseY, [-0.5, 0.5], ["7deg", "-7deg"]);
-    const rotateY = useTransform(mouseX, [-0.5, 0.5], ["-7deg", "7deg"]);
-
-    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        const width = rect.width;
-        const height = rect.height;
-        const mouseXVal = e.clientX - rect.left;
-        const mouseYVal = e.clientY - rect.top;
-        const xPct = mouseXVal / width - 0.5;
-        const yPct = mouseYVal / height - 0.5;
-        x.set(xPct);
-        y.set(yPct);
-    };
-
-    const handleMouseLeave = () => {
-        x.set(0);
-        y.set(0);
-    };
-
     // Config per category
     const getConfig = (cat: string) => {
         switch(cat) {
@@ -145,26 +83,19 @@ const TiltCard = ({ category, index }: { category: string, index: number }) => {
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true, margin: "-10%" }}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 * index }}
-            style={{ 
-                rotateX, 
-                rotateY, 
-                transformStyle: "preserve-3d" 
-            }}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-            className="relative h-full perspective-1000"
+            className="relative h-full"
         >
             {/* Card Body */}
             <div className="relative h-full bg-surface/40 backdrop-blur-xl border border-white/10 dark:border-white/5 rounded-3xl p-8 overflow-hidden group shadow-2xl dark:shadow-black/50 hover:shadow-[0_0_50px_-10px_rgba(234,179,8,0.2)] transition-shadow duration-500">
-                
+
                 {/* Metallic Border Gradient on Hover */}
                 <div className="absolute inset-0 rounded-3xl border border-transparent group-hover:border-yellow-500/40 transition-colors duration-500" />
-                
+
                 {/* Radial Golden Glow Gradient (Replaces Shimmer) */}
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none bg-[radial-gradient(circle_at_center,rgba(234,179,8,0.1)_0%,transparent_70%)]" />
-                
-                <div className="relative z-10 flex flex-col h-full" style={{ transform: "translateZ(20px)" }}>
-                    
+
+                <div className="relative z-10 flex flex-col h-full">
+
                     {/* Header */}
                     <div className="flex items-start justify-between mb-8">
                         <div className="flex items-center gap-4">
@@ -187,7 +118,7 @@ const TiltCard = ({ category, index }: { category: string, index: number }) => {
                     {/* Skill Tags */}
                     <div className="flex flex-wrap gap-3">
                         {catSkills.map((skill, i) => (
-                            <div 
+                            <div
                                 key={skill.name}
                                 className="group/tag flex items-center gap-2 px-3 py-2 rounded-lg bg-background/50 border border-border hover:border-yellow-500/40 hover:bg-yellow-500/10 hover:shadow-[0_0_10px_-2px_rgba(234,179,8,0.2)] transition-all cursor-default"
                             >
