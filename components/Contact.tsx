@@ -55,20 +55,20 @@ const Contact: React.FC = () => {
         <div className="grid lg:grid-cols-3 gap-8">
             
             {/* Left Column: Contact Info Card */}
-            <TiltWrapper className="h-full" delay={0.4}>
-                <div className="h-full bg-surface/40 backdrop-blur-xl border border-white/10 dark:border-white/5 p-8 rounded-3xl relative overflow-hidden group hover:border-yellow-500/30 hover:shadow-[0_0_50px_-10px_rgba(234,179,8,0.15)] transition-all duration-500 flex flex-col justify-between">
-                    
-                    {/* Metallic Border Gradient on Hover */}
-                    <div className="absolute inset-0 rounded-3xl border border-transparent group-hover:border-yellow-500/30 transition-colors duration-500 pointer-events-none" />
+            <motion.div
+                initial={{ opacity: 0, y: 50, scale: 0.9 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true, margin: "-10%" }}
+                transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
+                className="h-full"
+            >
+                <div className="h-full bg-surface/40 backdrop-blur-xl border border-white/10 dark:border-white/5 p-8 rounded-3xl flex flex-col justify-between">
 
-                    {/* Radial Golden Glow Gradient (Replaces Shimmer) */}
-                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none bg-[radial-gradient(circle_at_center,rgba(234,179,8,0.1)_0%,transparent_70%)]" />
-                    
-                    <div className="relative z-10">
-                        <div className="w-14 h-14 bg-gradient-to-br from-yellow-500/20 to-yellow-900/10 rounded-2xl flex items-center justify-center text-yellow-600 dark:text-yellow-400 mb-8 border border-yellow-500/20 shadow-[0_0_15px_-5px_rgba(234,179,8,0.3)]">
+                    <div>
+                        <div className="w-14 h-14 bg-gradient-to-br from-yellow-500/20 to-yellow-900/10 rounded-2xl flex items-center justify-center text-yellow-600 dark:text-yellow-400 mb-8 border border-yellow-500/20">
                             <MessageSquare size={28} />
                         </div>
-                        
+
                         <h3 className="text-2xl font-display font-bold text-foreground mb-3">Direct Line</h3>
                         <p className="text-muted mb-8 leading-relaxed text-sm font-light">
                             Currently available for select freelance commissions and consulting roles.
@@ -84,7 +84,7 @@ const Contact: React.FC = () => {
                                     <span className="text-foreground text-sm font-medium">malix@example.com</span>
                                 </div>
                             </a>
-                            
+
                             <div className="flex items-center gap-4 group/item">
                                 <div className="p-3 rounded-xl bg-background/50 border border-border group-hover/item:border-yellow-500/40 group-hover/item:bg-yellow-500/10 transition-colors text-muted group-hover/item:text-yellow-500">
                                     <MapPin size={18} />
@@ -97,11 +97,11 @@ const Contact: React.FC = () => {
                         </div>
                     </div>
 
-                    <div className="mt-12 relative z-10">
+                    <div className="mt-12">
                         <h4 className="text-[10px] font-bold text-muted uppercase tracking-widest mb-4">Neural Network</h4>
                         <div className="flex gap-3">
                             {SOCIALS.map((social) => (
-                                <a 
+                                <a
                                     key={social.platform}
                                     href={social.url}
                                     className="w-10 h-10 rounded-xl bg-background/50 border border-border flex items-center justify-center text-muted hover:text-yellow-500 hover:border-yellow-500/50 hover:bg-yellow-500/5 transition-all duration-300"
@@ -112,19 +112,19 @@ const Contact: React.FC = () => {
                         </div>
                     </div>
                 </div>
-            </TiltWrapper>
+            </motion.div>
 
             {/* Right Column: Contact Form Card */}
-            <TiltWrapper className="lg:col-span-2" delay={0.6}>
-                <div className="h-full bg-surface/40 backdrop-blur-xl border border-white/10 dark:border-white/5 p-8 md:p-10 rounded-3xl relative overflow-hidden group hover:border-yellow-500/30 hover:shadow-[0_0_50px_-10px_rgba(234,179,8,0.15)] transition-all duration-500">
-                     
-                     {/* Metallic Border Gradient on Hover */}
-                    <div className="absolute inset-0 rounded-3xl border border-transparent group-hover:border-yellow-500/30 transition-colors duration-500 pointer-events-none" />
+            <motion.div
+                initial={{ opacity: 0, y: 50, scale: 0.9 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true, margin: "-10%" }}
+                transition={{ duration: 0.8, ease: "easeOut", delay: 0.6 }}
+                className="lg:col-span-2 h-full"
+            >
+                <div className="h-full bg-surface/40 backdrop-blur-xl border border-white/10 dark:border-white/5 p-8 md:p-10 rounded-3xl">
 
-                     {/* Radial Golden Glow Gradient (Replaces Shimmer) */}
-                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none bg-[radial-gradient(circle_at_center,rgba(234,179,8,0.1)_0%,transparent_70%)]" />
-
-                    <form className="space-y-8 relative z-10" onSubmit={(e) => e.preventDefault()}>
+                    <form className="space-y-8" onSubmit={(e) => e.preventDefault()}>
                         <div className="grid md:grid-cols-2 gap-8">
                             <div className="space-y-2 group/input">
                                 <label className="text-[10px] font-bold text-muted uppercase tracking-widest ml-1 group-focus-within/input:text-yellow-500 transition-colors">Identity</label>
@@ -177,7 +177,7 @@ const Contact: React.FC = () => {
                         </div>
                     </form>
                 </div>
-            </TiltWrapper>
+            </motion.div>
 
         </div>
 
@@ -196,54 +196,6 @@ const Contact: React.FC = () => {
   );
 };
 
-// --- SUB-COMPONENT: 3D TILT WRAPPER ---
-const TiltWrapper = ({ children, className, delay = 0 }: { children: React.ReactNode, className?: string, delay?: number }) => {
-    const x = useMotionValue(0);
-    const y = useMotionValue(0);
 
-    const mouseX = useSpring(x, { stiffness: 150, damping: 15 });
-    const mouseY = useSpring(y, { stiffness: 150, damping: 15 });
-
-    const rotateX = useTransform(mouseY, [-0.5, 0.5], ["3deg", "-3deg"]);
-    const rotateY = useTransform(mouseX, [-0.5, 0.5], ["-3deg", "3deg"]);
-
-    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        const width = rect.width;
-        const height = rect.height;
-        const mouseXVal = e.clientX - rect.left;
-        const mouseYVal = e.clientY - rect.top;
-        const xPct = mouseXVal / width - 0.5;
-        const yPct = mouseYVal / height - 0.5;
-        x.set(xPct);
-        y.set(yPct);
-    };
-
-    const handleMouseLeave = () => {
-        x.set(0);
-        y.set(0);
-    };
-
-    return (
-        <motion.div
-            initial={{ opacity: 0, y: 50, scale: 0.9 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            viewport={{ once: true, margin: "-10%" }}
-            transition={{ duration: 0.8, ease: "easeOut", delay }}
-            style={{ 
-                rotateX, 
-                rotateY, 
-                transformStyle: "preserve-3d" 
-            }}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-            className={`perspective-1000 ${className}`}
-        >
-            <div className="h-full" style={{ transform: "translateZ(20px)" }}>
-                {children}
-            </div>
-        </motion.div>
-    );
-};
 
 export default Contact;
