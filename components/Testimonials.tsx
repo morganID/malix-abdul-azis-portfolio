@@ -15,15 +15,6 @@ const Testimonials: React.FC = () => {
 
   const categories = ['All', 'Upwork', 'Freelancer'];
 
-  // Gold Dust Particles
-  const particles = Array.from({ length: 20 }).map((_, i) => ({
-    id: i,
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    size: Math.random() * 2 + 1,
-    duration: Math.random() * 10 + 10,
-    delay: Math.random() * 5
-  }));
 
   return (
     <section id="reviews" className="py-32 bg-background relative overflow-hidden transition-colors duration-500">
@@ -31,34 +22,7 @@ const Testimonials: React.FC = () => {
       {/* --- BACKGROUND FX --- */}
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-yellow-900/20 to-transparent"></div>
       
-      {/* Ambient Glow */}
-      <div className="absolute top-1/2 right-0 w-[600px] h-[600px] bg-yellow-600/5 dark:bg-yellow-500/5 rounded-full blur-[120px] pointer-events-none translate-x-1/3" />
-
-      {/* Gold Dust Particles */}
-      <div className="absolute inset-0 pointer-events-none">
-        {particles.map((p) => (
-            <motion.div
-                key={p.id}
-                className="absolute rounded-full bg-yellow-500/30 dark:bg-yellow-200/20"
-                style={{ 
-                    left: `${p.x}%`, 
-                    top: `${p.y}%`,
-                    width: p.size,
-                    height: p.size
-                }}
-                animate={{ 
-                    y: [0, -100], 
-                    opacity: [0, 0.8, 0] 
-                }}
-                transition={{ 
-                    duration: p.duration, 
-                    repeat: Infinity, 
-                    delay: p.delay,
-                    ease: "linear"
-                }}
-            />
-        ))}
-      </div>
+     
       
       <div className="max-w-7xl mx-auto px-6 mb-12 relative z-10">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
@@ -146,14 +110,10 @@ const TestimonialCard: React.FC<{ item: typeof TESTIMONIALS[0], index: number }>
             initial={{ opacity: 0, y: 50, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 * index }}
-            className="group relative w-full h-full bg-surface/40 backdrop-blur-xl border border-white/10 dark:border-white/5 p-8 rounded-3xl hover:border-yellow-500/30 transition-all duration-500 flex flex-col hover:-translate-y-2 hover:shadow-[0_0_50px_-10px_rgba(234,179,8,0.15)]"
+            className="group relative w-full h-full  backdrop-blur-xl border border-white/10 dark:border-white/5 p-8 rounded-3xl hover:border-black-500/30 transition-all duration-500 flex flex-col hover:-translate-y-2 hover:shadow-[0_0_50px_-10px_rgba(234,179,8,0.15)]"
         >
-            {/* Metallic Border Gradient on Hover */}
-            <div className="absolute inset-0 rounded-3xl border border-transparent group-hover:border-yellow-500/30 transition-colors duration-500 pointer-events-none" />
-
-            {/* Radial Golden Glow Gradient (Replaces Shimmer) */}
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none bg-[radial-gradient(circle_at_center,rgba(234,179,8,0.1)_0%,transparent_70%)] rounded-3xl" />
-
+          
+         
             {/* Quote Icon Background */}
             <div className="absolute top-6 right-6 text-yellow-500/5 group-hover:text-yellow-500/10 transition-colors z-10">
                 <Quote size={60} />

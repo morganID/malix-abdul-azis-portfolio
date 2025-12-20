@@ -52,7 +52,7 @@ const Experience: React.FC = () => {
                 transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
                 className="flex items-center gap-4 mb-10"
             >
-                <div className="p-3 bg-surface/50 border border-yellow-500/20 rounded-xl text-black dark:text-yellow-400 shadow-[0_0_15px_-3px_rgba(234,179,8,0.2)]">
+                <div className="p-3 bg-surface/50 border border-black-500/20 rounded-xl text-black dark:text-yellow-400 shadow-[0_0_15px_-3px_rgba(234,179,8,0.2)]">
                     <Briefcase size={24} />
                 </div>
                 <h3 className="text-2xl font-display font-bold text-foreground">Career Path</h3>

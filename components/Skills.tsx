@@ -11,10 +11,7 @@ const Skills: React.FC = () => {
   return (
     <section id="skills" className="py-32 bg-background relative flex flex-col items-center justify-center overflow-hidden transition-colors duration-500">
 
-      {/* --- BACKGROUND FX --- */}
-      {/* Ambient Gold Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-yellow-600/5 dark:bg-yellow-500/5 rounded-full blur-[120px] pointer-events-none" />
-
+     
       {/* Header */}
       <div className="text-center mb-20 relative z-10 px-6">
         <motion.div 
@@ -86,13 +83,10 @@ const TiltCard = ({ category, index }: { category: string, index: number }) => {
             className="relative h-full"
         >
             {/* Card Body */}
-            <div className="relative h-full bg-surface/40 backdrop-blur-xl border border-white/10 dark:border-white/5 rounded-3xl p-8 overflow-hidden group shadow-2xl dark:shadow-black/50 hover:shadow-[0_0_50px_-10px_rgba(234,179,8,0.2)] transition-shadow duration-500">
+            <div className="relative h-full bg-surface/40 backdrop-blur-xl border border-white/10 dark:border-white/5 rounded-3xl p-8 overflow-hidden group  dark:shadow-black/50 hover:shadow-[0_0_50px_-10px_rgba(234,179,8,0.2)] transition-shadow duration-500">
 
                 {/* Metallic Border Gradient on Hover */}
                 <div className="absolute inset-0 rounded-3xl border border-transparent group-hover:border-yellow-500/40 transition-colors duration-500" />
-
-                {/* Radial Golden Glow Gradient (Replaces Shimmer) */}
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none bg-[radial-gradient(circle_at_center,rgba(234,179,8,0.1)_0%,transparent_70%)]" />
 
                 <div className="relative z-10 flex flex-col h-full">
 
