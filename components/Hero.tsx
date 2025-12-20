@@ -81,8 +81,6 @@ const Hero: React.FC = () => {
       {/* Central Eclipse Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] sm:w-[800px] sm:h-[800px] bg-blue-900/10 dark:bg-blue-900/20 rounded-full blur-[120px] pointer-events-none mix-blend-screen animate-pulse-slow" />
       
-      {/* Ambient background without particles */}
-      <div className="absolute inset-0 z-0 bg-gradient-to-b from-transparent via-blue-50/5 to-transparent dark:via-blue-900/5" />
       
       {/* 1. MAIN CONTENT */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 w-full flex flex-col items-center justify-center perspective-[1200px]">
