@@ -9,12 +9,7 @@ const Experience: React.FC = () => {
   return (
     <section id="experience" className="py-32 bg-background relative overflow-hidden transition-colors duration-500">
 
-      {/* --- BACKGROUND FX --- */}
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-yellow-900/20 to-transparent"></div>
-
-      {/* Ambient Glow */}
-      <div className="absolute bottom-0 left-0 w-[800px] h-[800px] bg-yellow-600/5 dark:bg-yellow-500/5 rounded-full blur-[120px] pointer-events-none -translate-x-1/2" />
-
+    
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         
         {/* Header */}
