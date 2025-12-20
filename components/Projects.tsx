@@ -9,12 +9,8 @@ const Projects: React.FC = () => {
   return (
     <section id="projects" className="py-32 bg-background relative overflow-hidden transition-colors duration-500">
 
-      {/* --- BACKGROUND FX --- */}
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-yellow-900/20 to-transparent"></div>
-
-      {/* Ambient Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-yellow-600/5 dark:bg-yellow-500/5 rounded-full blur-[120px] pointer-events-none" />
-
+     
+     
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         
         {/* Header */}
@@ -80,9 +76,7 @@ const ProjectCard = ({ project, index }: { project: any, index: number }) => {
         >
             <div className="relative h-full bg-surface/40 backdrop-blur-xl border border-white/10 dark:border-white/5 rounded-3xl overflow-hidden shadow-2xl dark:shadow-black/50 hover:shadow-[0_0_50px_-10px_rgba(234,179,8,0.2)] hover:border-yellow-500/30 transition-all duration-500 flex flex-col">
 
-                {/* Radial Golden Glow Gradient (Replaces Shimmer) */}
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none bg-[radial-gradient(circle_at_center,rgba(234,179,8,0.1)_0%,transparent_70%)] z-0" />
-
+                
                 {/* Image Container */}
                 <div className="relative aspect-[16/10] overflow-hidden z-10">
                     <div className="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent z-10 opacity-80" />
