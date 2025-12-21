@@ -49,7 +49,7 @@ const Skills: React.FC = () => {
       {/* Grid Container */}
       <div className="relative w-full max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-8 z-10">
          {categories.map((cat, index) => (
-             <TiltCard key={cat} category={cat} index={index} />
+             <TiltCard key={index} category={cat} index={index} />
          ))}
       </div>
 
@@ -58,7 +58,7 @@ const Skills: React.FC = () => {
 };
 
 // --- SUB-COMPONENT: SKILL CARD ---
-const TiltCard = ({ category, index }: { category: string, index: number }) => {
+const TiltCard: React.FC<{ category: string, index: number }> = ({ category, index }) => {
     // Config per category
     const getConfig = (cat: string) => {
         switch(cat) {
@@ -83,7 +83,7 @@ const TiltCard = ({ category, index }: { category: string, index: number }) => {
             className="relative h-full"
         >
             {/* Card Body */}
-            <div className="relative h-full bg-surface/40 backdrop-blur-xl border border-white/10 dark:border-white/5 rounded-3xl p-8 overflow-hidden group  dark:shadow-black/50 hover:shadow-[0_0_50px_-10px_rgba(234,179,8,0.2)] transition-shadow duration-500">
+            <div className="relative h-full bg-surface/40 backdrop-blur-md border border-white/10 dark:border-white/5 rounded-3xl p-8 overflow-hidden group  dark:shadow-black/50 hover:shadow-[0_0_50px_-10px_rgba(234,179,8,0.2)] transition-shadow duration-500">
 
                 {/* Metallic Border Gradient on Hover */}
                 <div className="absolute inset-0 rounded-3xl border border-transparent group-hover:border-yellow-500/40 transition-colors duration-500" />
@@ -116,7 +116,7 @@ const TiltCard = ({ category, index }: { category: string, index: number }) => {
                                 key={skill.name}
                                 className="group/tag flex items-center gap-2 px-3 py-2 rounded-lg bg-background/50 border border-border hover:border-yellow-500/40 hover:bg-yellow-500/10 hover:shadow-[0_0_10px_-2px_rgba(234,179,8,0.2)] transition-all cursor-default"
                             >
-                                <img src={skill.icon} alt={skill.name} className="w-4 h-4 grayscale group-hover/tag:grayscale-0 transition-all opacity-70 group-hover/tag:opacity-100" />
+                                <img src={skill.icon} alt={skill.name} width="16" height="16" className="w-4 h-4 grayscale group-hover/tag:grayscale-0 transition-all opacity-70 group-hover/tag:opacity-100" />
                                 <span className="text-xs font-medium text-muted group-hover/tag:text-foreground transition-colors">
                                     {skill.name}
                                 </span>

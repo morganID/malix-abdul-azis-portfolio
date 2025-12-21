@@ -108,11 +108,11 @@ const Hero: React.FC = () => {
 
             {/* Main Title - Massive with REAL GOLD Shine Animation */}
             <div className="relative mb-6 w-full flex justify-center">
-                <motion.h1 
-                    initial={{ opacity: 0, scale: 0.9, filter: "blur(10px)" }}
+                <motion.h1
+                    initial={{ opacity: 1, scale: 0.9, filter: "blur(10px)" }}
                     animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
                     transition={{ duration: 1.2, ease: "circOut" }}
-                    className="whitespace-nowrap text-[clamp(2rem,8.5vw,9rem)] font-university font-bold tracking-wide leading-none select-none text-transparent bg-clip-text bg-[linear-gradient(110deg,#854d0e_0%,#ca8a04_25%,#854d0e_45%,#ffffff_50%,#854d0e_55%,#ca8a04_75%,#854d0e_100%)] dark:bg-[linear-gradient(110deg,#8a6e2f_0%,#eec13f_25%,#8a6e2f_45%,#ffffff_50%,#8a6e2f_55%,#eec13f_75%,#8a6e2f_100%)] bg-[length:200%_auto] animate-shine-text"
+                    className="lcp-element whitespace-nowrap text-[clamp(2rem,8.5vw,9rem)] font-university font-bold tracking-wide leading-none select-none text-transparent bg-clip-text bg-[linear-gradient(110deg,#854d0e_0%,#ca8a04_25%,#854d0e_45%,#ffffff_50%,#854d0e_55%,#ca8a04_75%,#854d0e_100%)] dark:bg-[linear-gradient(110deg,#8a6e2f_0%,#eec13f_25,#8a6e2f_45%,#ffffff_50%,#8a6e2f_55%,#eec13f_75%,#8a6e2f_100%)] bg-[length:200%_auto] animate-shine-text"
                     style={{ transform: "translateZ(60px)" }}
                 >
                     {displayText}

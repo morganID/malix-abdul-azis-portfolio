@@ -31,7 +31,7 @@ const About: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true, margin: "-10%" }}
                 transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-                className="relative aspect-[4/5] w-full max-w-md mx-auto md:max-w-none rounded-3xl overflow-hidden bg-surface/40 backdrop-blur-xl border border-white/10 dark:border-white/5 group shadow-2xl"
+                className="relative aspect-[4/5] w-full max-w-md mx-auto md:max-w-none rounded-3xl overflow-hidden bg-surface/40 backdrop-blur-md border border-white/10 dark:border-white/5 group shadow-2xl"
             >
 
                 {/* Image */}

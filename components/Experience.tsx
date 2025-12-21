@@ -90,7 +90,7 @@ const Experience: React.FC = () => {
                 transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
                 className="flex items-center gap-4 mb-10"
             >
-                <div className="p-3 bg-surface/50 border border-yellow-500/20 rounded-xl text-black dark:text-yellow-400 shadow-[0_0_15px_-3px_rgba(234,179,8,0.2)]">
+                <div className="p-3 bg-surface/50 border border-black-500/20 rounded-xl text-black dark:text-yellow-400 shadow-[0_0_15px_-3px_rgba(234,179,8,0.2)]">
                     <GraduationCap size={24} />
                 </div>
                 <h3 className="text-2xl font-display font-bold text-foreground">Academic Arc</h3>
@@ -146,9 +146,7 @@ const TimelineCard = ({ children, index }: { children: React.ReactNode, index: n
                 {/* Metallic Border Gradient on Hover */}
                 <div className="absolute inset-0 rounded-2xl border border-transparent group-hover:border-yellow-500/30 transition-colors duration-500" />
 
-                {/* Radial Golden Glow Gradient (Same as Skills) */}
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none bg-[radial-gradient(circle_at_center,rgba(234,179,8,0.1)_0%,transparent_70%)]" />
-                
+              
                 {/* Content relative z-index to sit on top of glow */}
                 <div className="relative z-10">
                    {children}
