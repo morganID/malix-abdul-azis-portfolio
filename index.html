@@ -11,75 +11,102 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&family=Rajdhani:wght@500;600;700&family=Cinzel:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Critical CSS for Above-the-Fold Content -->
+    <style>
+      /* Critical styles for immediate rendering */
+      body { margin: 0; font-family: 'Inter', sans-serif; background: #f8fafc; color: #0f172a; }
+      .dark body { background: #050505; color: #ffffff; }
+      .min-h-screen { min-height: 100vh; }
+      .flex { display: flex; }
+      .items-center { align-items: center; }
+      .justify-center { justify-content: center; }
+      .text-center { text-align: center; }
+      .text-4xl { font-size: 2.25rem; }
+      .font-bold { font-weight: 700; }
+      .text-transparent { color: transparent; }
+      .bg-clip-text { -webkit-background-clip: text; background-clip: text; }
+      .lcp-element { opacity: 1 !important; transform: none !important; filter: none !important; }
+    </style>
+
+    <!-- Load Tailwind CSS Non-Blocking -->
+    <link rel="preload" href="https://cdn.tailwindcss.com" as="script">
     <script>
-      tailwind.config = {
-        darkMode: 'class', // Enable class-based dark mode
-        theme: {
-          extend: {
-            fontFamily: {
-              sans: ['Inter', 'sans-serif'],
-              display: ['Space Grotesk', 'sans-serif'],
-              tech: ['Rajdhani', 'sans-serif'], 
-              university: ['Cinzel', 'serif'], // New University Font
-            },
-            colors: {
-              background: 'var(--bg-color)',
-              surface: 'var(--surface-color)',
-              foreground: 'var(--text-color)',
-              muted: 'var(--text-muted)',
-              border: 'var(--border-color)',
-              primary: '#3b82f6',
-              accent: '#8b5cf6',
-            },
-            backgroundImage: {
-              'grid-pattern': "linear-gradient(to right, var(--border-color) 1px, transparent 1px), linear-gradient(to bottom, var(--border-color) 1px, transparent 1px)",
-            },
-            backgroundSize: {
-              'grid-size': '40px 40px',
-            },
-            animation: {
-              'blob': 'blob 10s infinite',
-              'float': 'float 6s ease-in-out infinite',
-              'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-              'shimmer': 'shimmer 2s linear infinite',
-              'meteor': 'meteor 5s linear infinite',
-              'twinkle': 'twinkle 3s ease-in-out infinite',
-              'shine-text': 'shine-text 8s linear infinite',
-            },
-            keyframes: {
-              blob: {
-                '0%': { transform: 'translate(0px, 0px) scale(1)' },
-                '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
-                '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
-                '100%': { transform: 'translate(0px, 0px) scale(1)' },
+      // Load Tailwind non-blocking using media="print" trick
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = 'https://cdn.tailwindcss.com';
+      link.media = 'print';
+      link.onload = function() {
+        link.media = 'all';
+        // Initialize Tailwind config after load
+        tailwind.config = {
+          darkMode: 'class',
+          theme: {
+            extend: {
+              fontFamily: {
+                sans: ['Inter', 'sans-serif'],
+                display: ['Space Grotesk', 'sans-serif'],
+                tech: ['Rajdhani', 'sans-serif'],
+                university: ['Cinzel', 'serif'],
               },
-              float: {
-                '0%, 100%': { transform: 'translateY(0)' },
-                '50%': { transform: 'translateY(-20px)' },
+              colors: {
+                background: 'var(--bg-color)',
+                surface: 'var(--surface-color)',
+                foreground: 'var(--text-color)',
+                muted: 'var(--text-muted)',
+                border: 'var(--border-color)',
+                primary: '#3b82f6',
+                accent: '#8b5cf6',
               },
-              shimmer: {
-                '0%': { transform: 'translateX(-100%)' },
-                '100%': { transform: 'translateX(100%)' }
+              backgroundImage: {
+                'grid-pattern': "linear-gradient(to right, var(--border-color) 1px, transparent 1px), linear-gradient(to bottom, var(--border-color) 1px, transparent 1px)",
               },
-              meteor: {
-                '0%': { transform: 'rotate(215deg) translateX(0)', opacity: 1 },
-                '70%': { opacity: 1 },
-                '100%': { transform: 'rotate(215deg) translateX(-500px)', opacity: 0 }
+              backgroundSize: {
+                'grid-size': '40px 40px',
               },
-              twinkle: {
-                '0%, 100%': { opacity: 0.2, transform: 'scale(0.8)' },
-                '50%': { opacity: 1, transform: 'scale(1.2)' }
+              animation: {
+                'blob': 'blob 10s infinite',
+                'float': 'float 6s ease-in-out infinite',
+                'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                'shimmer': 'shimmer 2s linear infinite',
+                'meteor': 'meteor 5s linear infinite',
+                'twinkle': 'twinkle 3s ease-in-out infinite',
+                'shine-text': 'shine-text 8s linear infinite',
               },
-              'shine-text': {
-                '0%': { 'background-position': '0% center', '-webkit-background-clip': 'text', 'background-clip': 'text' },
-                '100%': { 'background-position': '-200% center', '-webkit-background-clip': 'text', 'background-clip': 'text' }
+              keyframes: {
+                blob: {
+                  '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                  '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                  '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                  '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                },
+                float: {
+                  '0%, 100%': { transform: 'translateY(0)' },
+                  '50%': { transform: 'translateY(-20px)' },
+                },
+                shimmer: {
+                  '0%': { transform: 'translateX(-100%)' },
+                  '100%': { transform: 'translateX(100%)' }
+                },
+                meteor: {
+                  '0%': { transform: 'rotate(215deg) translateX(0)', opacity: 1 },
+                  '70%': { opacity: 1 },
+                  '100%': { transform: 'rotate(215deg) translateX(-500px)', opacity: 0 }
+                },
+                twinkle: {
+                  '0%, 100%': { opacity: 0.2, transform: 'scale(0.8)' },
+                  '50%': { opacity: 1, transform: 'scale(1.2)' }
+                },
+                'shine-text': {
+                  '0%': { 'background-position': '0% center', '-webkit-background-clip': 'text', 'background-clip': 'text' },
+                  '100%': { 'background-position': '-200% center', '-webkit-background-clip': 'text', 'background-clip': 'text' }
+                }
               }
             }
           }
-        }
-      }
+        };
+      };
+      document.head.appendChild(link);
     </script>
     <style>
       /* CSS Variables for Theming */
